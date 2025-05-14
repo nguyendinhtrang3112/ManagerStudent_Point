@@ -1,0 +1,94 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:MauiApp2"
+             xmlns:converters="clr-namespace:MauiApp2.Converters"
+             x:Class="MauiApp2.StudentListPage"
+             Title="Danh sách học sinh"
+             BackgroundColor="White">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:AlternatingRowColorConverter x:Key="AlternatingRowColorConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+
+            <!-- Tiêu đề -->
+            <Label Text="QUẢN LÝ HỌC SINH"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   TextColor="Black"
+                   Margin="0,10" />
+
+            <!-- Ô tìm kiếm -->
+            <SearchBar Placeholder="Tìm học sinh theo tên"
+                       TextChanged="OnSearchBarTextChanged"
+                       BackgroundColor="#f0f0f0"
+                       HeightRequest="40" />
+
+            <!-- Bảng tiêu đề -->
+            <Grid ColumnDefinitions="1*,2*,1*,1*,1*,1.5*"
+                  Padding="10"
+                  BackgroundColor="#e0e0e0"
+                  HeightRequest="40"
+                  ColumnSpacing="10">
+                <Label Grid.Column="0" Text="Mã HS" FontAttributes="Bold" VerticalTextAlignment="Center" TextColor="Black" />
+                <Label Grid.Column="1" Text="Tên" FontAttributes="Bold" VerticalTextAlignment="Center" TextColor="Black" />
+                <Label Grid.Column="2" Text="Lớp" FontAttributes="Bold" VerticalTextAlignment="Center" TextColor="Black" />
+                <Label Grid.Column="3" Text="Môn" FontAttributes="Bold" VerticalTextAlignment="Center" TextColor="Black" />
+                <Label Grid.Column="4" Text="Điểm" FontAttributes="Bold" VerticalTextAlignment="Center" TextColor="Black" />
+                <Label Grid.Column="5" Text="Thao tác" FontAttributes="Bold" VerticalTextAlignment="Center" TextColor="Black" HorizontalOptions="Center" />
+            </Grid>
+
+            <!-- Danh sách -->
+            <CollectionView x:Name="StudentList"
+                            BackgroundColor="White"
+                            Margin="0"
+                            HorizontalOptions="FillAndExpand">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid ColumnDefinitions="1*,2*,1*,1*,1*,1.5*"
+                              Padding="10"
+                              Margin="0,1"
+                              HeightRequest="50"
+                              ColumnSpacing="10"
+                              BackgroundColor="{Binding RowIndex, Converter={StaticResource AlternatingRowColorConverter}}"
+                              VerticalOptions="Center">
+
+                            <Label Grid.Column="0" Text="{Binding Id}" VerticalTextAlignment="Center" TextColor="Black" />
+                            <Label Grid.Column="1" Text="{Binding Name}" VerticalTextAlignment="Center" TextColor="Black" />
+                            <Label Grid.Column="2" Text="{Binding Class}" VerticalTextAlignment="Center" TextColor="Black" />
+                            <Label Grid.Column="3" Text="{Binding SubjectName}" VerticalTextAlignment="Center" TextColor="Black" />
+                            <Label Grid.Column="4" Text="{Binding Grade}" VerticalTextAlignment="Center" TextColor="Black" />
+
+                            <!-- Nút Sửa và Xoá -->
+                            <HorizontalStackLayout Grid.Column="5" Spacing="10" HorizontalOptions="Center" VerticalOptions="Center">
+                                <Button Text="✏️"
+                                        BackgroundColor="#FFA500"
+                                        TextColor="White"
+                                        WidthRequest="40"
+                                        HeightRequest="35"
+                                        CornerRadius="5"
+                                        Clicked="OnEditStudentClicked"
+                                        CommandParameter="{Binding}" />
+
+                                <Button Text="🗑️"
+                                        BackgroundColor="#FF3B30"
+                                        TextColor="White"
+                                        WidthRequest="40"
+                                        HeightRequest="35"
+                                        CornerRadius="5"
+                                        Clicked="OnDeleteStudentClicked"
+                                        CommandParameter="{Binding}" />
+                            </HorizontalStackLayout>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

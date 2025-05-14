@@ -1,0 +1,103 @@
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp2.MainPage"
+             BackgroundColor="#F2F2F2"
+             Title="">
+
+    <Grid RowDefinitions="Auto,*">
+
+        <!-- Thanh trên cùng chứa nút ☰ -->
+        <Grid BackgroundColor="White" Padding="10" Row="0">
+            <Button 
+                Text="☰"
+                FontSize="24"
+                BackgroundColor="Transparent"
+                HorizontalOptions="Start"
+                Clicked="OnMenuButtonClicked" />
+        </Grid>
+
+        <!-- Nội dung chính -->
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="20" Spacing="20" VerticalOptions="CenterAndExpand">
+
+                <Frame BackgroundColor="White" CornerRadius="16" Padding="20" HasShadow="True">
+                    <VerticalStackLayout Spacing="15">
+
+                        <Label Text="Quản lý điểm học sinh"
+                               HorizontalOptions="Center"
+                               FontSize="24"
+                               FontAttributes="Bold"
+                               TextColor="#333" />
+
+                        <Frame CornerRadius="10" Padding="0" BackgroundColor="#F5F5F5" HasShadow="False">
+                            <Entry x:Name="NameEntry"
+                                   Placeholder="Tên học sinh"
+                                   TextColor="Black"
+                                   PlaceholderColor="Gray"
+                                   BackgroundColor="Transparent"
+                                   HeightRequest="45" />
+                        </Frame>
+
+                        <Frame CornerRadius="10" Padding="0" BackgroundColor="#F5F5F5" HasShadow="False">
+                            <Entry x:Name="GradeEntry"
+                                   Placeholder="Điểm thành phần"
+                                   Keyboard="Numeric"
+                                   TextColor="Black"
+                                   PlaceholderColor="Gray"
+                                   BackgroundColor="Transparent"
+                                   HeightRequest="45" />
+                        </Frame>
+
+                        <Frame CornerRadius="10" Padding="0" BackgroundColor="#F5F5F5" HasShadow="False">
+                            <Entry x:Name="ClassEntry"
+                                   Placeholder="Mã lớp"
+                                   TextColor="Black"
+                                   PlaceholderColor="Gray"
+                                   BackgroundColor="Transparent"
+                                   HeightRequest="45" />
+                        </Frame>
+
+                        <Frame CornerRadius="10" Padding="0" BackgroundColor="#F5F5F5" HasShadow="False">
+                            <DatePicker x:Name="DateOfBirthPicker"
+                                        TextColor="Black"
+                                        BackgroundColor="Transparent"
+                                        HeightRequest="45" />
+                        </Frame>
+
+                        <Frame CornerRadius="10" Padding="0" BackgroundColor="#F5F5F5" HasShadow="False" HeightRequest="50">
+                            <Grid>
+                                <Picker x:Name="SubjectPicker"
+                                        ItemDisplayBinding="{Binding Name}"
+                                        TextColor="Black"
+                                        BackgroundColor="Transparent"
+                                        SelectedIndexChanged="SubjectPicker_SelectedIndexChanged"
+                                        Margin="10,0" />
+
+                                <Label x:Name="SubjectPlaceholder"
+                                       Text="Môn học"
+                                       TextColor="Gray"
+                                       Margin="10,0"
+                                       VerticalTextAlignment="Center"
+                                       IsVisible="True"
+                                       InputTransparent="False">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="SubjectPlaceholder_Tapped" />
+                                    </Label.GestureRecognizers>
+                                </Label>
+                            </Grid>
+                        </Frame>
+
+                        <Button Text="Thêm học sinh"
+                                Clicked="OnAddStudentClicked"
+                                BackgroundColor="#7B61FF"
+                                TextColor="White"
+                                FontAttributes="Bold"
+                                CornerRadius="12"
+                                HeightRequest="50" />
+                    </VerticalStackLayout>
+                </Frame>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>
