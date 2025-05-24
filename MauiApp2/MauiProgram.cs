@@ -13,6 +13,7 @@ public static class MauiProgram
             .ConfigureFonts(fonts =>
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
+                fonts.AddFont("MaterialIcons-Regular.ttf", "MaterialIcons"); // Thêm dòng này để dùng biểu tượng Material
             });
 
         // Đăng ký DatabaseHelper

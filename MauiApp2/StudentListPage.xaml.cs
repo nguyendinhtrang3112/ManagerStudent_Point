@@ -40,7 +40,6 @@ public partial class StudentListPage : ContentPage
         StudentList.ItemsSource = allStudents;
     }
 
-
     private async void OnDeleteStudentClicked(object sender, EventArgs e)
     {
         var button = sender as Button;
@@ -116,4 +115,9 @@ public partial class StudentListPage : ContentPage
         StudentList.ItemsSource = filtered;
     }
 
+    // ✅ Thêm sự kiện xử lý cho nút ☰
+    private void OnMenuButtonClicked(object sender, EventArgs e)
+    {
+        Shell.Current.FlyoutIsPresented = true;
+    }
 }

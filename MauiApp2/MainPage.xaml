@@ -8,11 +8,12 @@
 
         <!-- Thanh trên cùng chứa nút ☰ -->
         <Grid BackgroundColor="White" Padding="10" Row="0">
-            <Button 
+            <Button     
                 Text="☰"
                 FontSize="24"
                 BackgroundColor="Transparent"
                 HorizontalOptions="Start"
+                TextColor="#333"
                 Clicked="OnMenuButtonClicked" />
         </Grid>
 
