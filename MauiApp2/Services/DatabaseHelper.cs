@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
-using MauiApp2.Models; // Đảm bảo bạn có thư mục Models chứa class Student và Subject
+using MauiApp2.Models;
 
 namespace MauiApp2.Services
 {
@@ -18,10 +18,11 @@ namespace MauiApp2.Services
 
             // Tạo bảng nếu chưa có
             _database.CreateTableAsync<Student>().Wait();
-            _database.CreateTableAsync<Subject>().Wait(); // 👈 Thêm bảng Subject
+            _database.CreateTableAsync<Subject>().Wait();
+            _database.CreateTableAsync<User>().Wait(); // 👈 Thêm bảng User
         }
 
-        // --------- STUDENT ---------
+        // ------------------ STUDENT ------------------
         public Task<int> AddStudentAsync(Student student)
         {
             return _database.InsertAsync(student);
@@ -32,7 +33,6 @@ namespace MauiApp2.Services
             var students = await _database.Table<Student>().ToListAsync();
             var subjects = await _database.Table<Subject>().ToListAsync();
 
-            // Gán SubjectName cho mỗi học sinh dựa trên SubjectId
             foreach (var student in students)
             {
                 var subject = subjects.Find(s => s.Id == student.SubjectId);
@@ -52,7 +52,7 @@ namespace MauiApp2.Services
             return _database.DeleteAsync(student);
         }
 
-        // --------- SUBJECT ---------
+        // ------------------ SUBJECT ------------------
         public Task<int> AddSubjectAsync(Subject subject)
         {
             return _database.InsertAsync(subject);
@@ -71,6 +71,33 @@ namespace MauiApp2.Services
         public Task<int> DeleteSubjectAsync(Subject subject)
         {
             return _database.DeleteAsync(subject);
+        }
+
+        // ------------------ USER ------------------
+        public Task<int> AddUserAsync(User user)
+        {
+            return _database.InsertAsync(user);
+        }
+
+        public Task<User> GetUserByUsernameAsync(string username)
+        {
+            return _database.Table<User>()
+                .FirstOrDefaultAsync(u => u.Username == username);
+        }
+
+        public Task<List<User>> GetAllUsersAsync()
+        {
+            return _database.Table<User>().ToListAsync();
+        }
+
+        public Task<int> UpdateUserAsync(User user)
+        {
+            return _database.UpdateAsync(user);
+        }
+
+        public Task<int> DeleteUserAsync(User user)
+        {
+            return _database.DeleteAsync(user);
         }
     }
 }

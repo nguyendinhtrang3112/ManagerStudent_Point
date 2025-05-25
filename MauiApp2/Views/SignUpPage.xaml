@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:MauiApp2.ViewModels"
+             x:Class="MauiApp2.Views.SignUpPage"
+             BackgroundColor="#F6F8FA"
+             Padding="30"
+             x:DataType="vm:RegisterViewModel">
+
+    <ContentPage.BindingContext>
+        <vm:RegisterViewModel />
+    </ContentPage.BindingContext>
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="20" VerticalOptions="Center">
+
+            <Label Text="Create Account"
+                   FontSize="28"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"/>
+
+            <!-- Username -->
+            <Frame HasShadow="False"
+                   BorderColor="#CCCCCC"
+                   CornerRadius="10"
+                   Padding="10"
+                   BackgroundColor="White">
+                <Entry Placeholder="Username"
+                       FontSize="16"
+                       Text="{Binding Username, Mode=TwoWay}" />
+            </Frame>
+
+            <!-- Email -->
+            <Frame HasShadow="False"
+                   BorderColor="#CCCCCC"
+                   CornerRadius="10"
+                   Padding="10"
+                   BackgroundColor="White">
+                <Entry Placeholder="Email"
+                       Keyboard="Email"
+                       FontSize="16"
+                       Text="{Binding Email, Mode=TwoWay}" />
+            </Frame>
+
+            <!-- Password -->
+            <Frame HasShadow="False"
+                   BorderColor="#CCCCCC"
+                   CornerRadius="10"
+                   Padding="10"
+                   BackgroundColor="White">
+                <Entry Placeholder="Password"
+                       IsPassword="True"
+                       FontSize="16"
+                       Text="{Binding Password, Mode=TwoWay}" />
+            </Frame>
+
+            <!-- Error Message -->
+            <Label Text="{Binding ErrorMessage}"
+                   TextColor="Red"
+                   FontAttributes="Italic"
+                   IsVisible="{Binding IsErrorVisible}" />
+
+            <!-- Register Button -->
+            <Button Text="REGISTER"
+                    BackgroundColor="#4E73DF"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    CornerRadius="10"
+                    HeightRequest="50"
+                    Command="{Binding RegisterCommand}" />
+
+            <!-- Navigate to Login -->
+            <StackLayout Orientation="Horizontal"
+                         HorizontalOptions="Center">
+                <Label Text="Already have an account?" />
+                <Label Text=" Log In"
+                       TextColor="#4E73DF"
+                       FontAttributes="Bold">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding NavigateToLoginCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </StackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

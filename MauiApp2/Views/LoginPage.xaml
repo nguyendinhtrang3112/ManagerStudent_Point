@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:MauiApp2.ViewModels"
+             x:Class="MauiApp2.Views.LoginPage"
+             BackgroundColor="#F6F8FA"
+             Padding="30"
+             x:DataType="vm:LoginViewModel">
+
+    <ContentPage.BindingContext>
+        <vm:LoginViewModel />
+    </ContentPage.BindingContext>
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="20" VerticalOptions="Center">
+
+            <!-- Tiêu đề -->
+            <Label Text="Welcome back"
+                   FontSize="28"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"/>
+
+            <Label Text="Login to your account"
+                   FontSize="16"
+                   TextColor="Gray"
+                   HorizontalOptions="Center"/>
+
+            <!-- Email -->
+            <Frame HasShadow="False"
+                   BorderColor="#CCCCCC"
+                   CornerRadius="10"
+                   Padding="10"
+                   BackgroundColor="White">
+                <Entry Placeholder="Email"
+                       Keyboard="Email"
+                       FontSize="16"
+                       Text="{Binding Username, Mode=TwoWay}" />
+            </Frame>
+
+            <!-- Password -->
+            <Frame HasShadow="False"
+                   BorderColor="#CCCCCC"
+                   CornerRadius="10"
+                   Padding="10"
+                   BackgroundColor="White">
+                <Entry Placeholder="Password"
+                       IsPassword="True"
+                       FontSize="16"
+                       Text="{Binding Password, Mode=TwoWay}" />
+            </Frame>
+
+            <!-- Ghi nhớ và quên mật khẩu -->
+            <Grid ColumnDefinitions="Auto, *, Auto">
+                <CheckBox VerticalOptions="Center" />
+                <Label Text="Remember me"
+                       VerticalOptions="Center"
+                       FontSize="14"
+                       Grid.Column="1" />
+                <Label Text="Forgot password?"
+                       TextColor="#4E73DF"
+                       FontSize="14"
+                       HorizontalOptions="End"
+                       Grid.Column="2" />
+            </Grid>
+
+            <!-- Nút đăng nhập -->
+            <Button Text="LOGIN"
+                    BackgroundColor="#4E73DF"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    CornerRadius="10"
+                    HeightRequest="50"
+                    Command="{Binding LoginCommand}" />
+
+            <!-- Thông báo lỗi -->
+            <Label Text="{Binding ErrorMessage}"
+                   TextColor="Red"
+                   FontAttributes="Italic"
+                   IsVisible="{Binding IsErrorVisible}" />
+
+            <!-- Đăng ký -->
+            <StackLayout Orientation="Horizontal"
+                         HorizontalOptions="Center">
+                <Label Text="Don't have an account?" />
+                <Label Text=" Sign Up"
+                       TextColor="#4E73DF"
+                       FontAttributes="Bold">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding NavigateToRegisterCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </StackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

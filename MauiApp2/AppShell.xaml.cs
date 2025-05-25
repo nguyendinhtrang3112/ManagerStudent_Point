@@ -5,6 +5,10 @@
         public AppShell()
         {
             InitializeComponent();
+
+            // Điều hướng đến trang đăng nhập khi khởi chạy
+            GoToAsync("//LoginPage");
         }
     }
+
 }
