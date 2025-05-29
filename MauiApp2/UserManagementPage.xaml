@@ -12,36 +12,69 @@
 
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="15">
+
+            <!-- Nút Trở về -->
+            <Button Text="← Quay về"
+                    FontAttributes="Bold"
+                    TextColor="White"
+                    BackgroundColor="#007AFF"
+                    Clicked="OnBackButtonClicked"
+                    HorizontalOptions="Start"
+                    Margin="0,0,0,10" />
+
+            <!-- Tiêu đề -->
             <Label Text="DANH SÁCH TÀI KHOẢN"
                    FontSize="24"
                    FontAttributes="Bold"
                    HorizontalOptions="Center"
                    TextColor="Black" />
 
+            <!-- Danh sách tài khoản -->
             <CollectionView ItemsSource="{Binding Users}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="vm:UserDisplay">
                         <Grid ColumnDefinitions="2*,2*,2*,2*,Auto"
                               Padding="10"
                               BackgroundColor="#f9f9f9"
-                              Margin="0,5">
+                              Margin="0,5"
+                              VerticalOptions="Center">
 
                             <Label Grid.Column="0" Text="{Binding Username}" VerticalTextAlignment="Center" />
                             <Label Grid.Column="1" Text="{Binding Email}" VerticalTextAlignment="Center" />
                             <Label Grid.Column="2" Text="{Binding Role}" VerticalTextAlignment="Center" />
 
-                            <Picker Grid.Column="3"
+                            <!-- Picker với giao diện rõ ràng -->
+                            <Frame Grid.Column="3"
+                                   Padding="0"
+                                   CornerRadius="6"
+                                   BorderColor="Gray"
+                                   HasShadow="False"
+                                   BackgroundColor="White"
+                                   VerticalOptions="Center"
+                                   HeightRequest="40">
+                                <Picker
                                     ItemsSource="{Binding Source={RelativeSource AncestorType={x:Type vm:UserManagementViewModel}}, Path=RoleOptions}"
-                                    SelectedItem="{Binding NewRole}" />
+                                    SelectedItem="{Binding NewRole}"
+                                    TextColor="Black"
+                                    FontSize="14"
+                                    HorizontalOptions="FillAndExpand" />
+                            </Frame>
 
+                            <!-- Nút lưu -->
                             <Button Grid.Column="4"
                                     Text="Lưu"
+                                    BackgroundColor="#8e44ad"
+                                    TextColor="White"
+                                    CornerRadius="8"
+                                    Padding="10,5"
+                                    FontAttributes="Bold"
                                     Command="{Binding Source={RelativeSource AncestorType={x:Type vm:UserManagementViewModel}}, Path=SaveRoleCommand}"
                                     CommandParameter="{Binding}" />
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

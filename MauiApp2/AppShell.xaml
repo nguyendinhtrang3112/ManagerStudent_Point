@@ -13,16 +13,21 @@
     <!-- Đăng ký route -->
     <ShellContent Route="LoginPage" ContentTemplate="{DataTemplate views:LoginPage}" />
     <ShellContent Route="StudentPage" ContentTemplate="{DataTemplate local:StudentPage}" />
-    <ShellContent Route="UserManagementPage" ContentTemplate="{DataTemplate local:UserManagementPage}" />
+    
     <FlyoutItem Title="Home" Route="MainPage">
         <ShellContent
-            Title="Trang chủ"
+            Title="Home"
             ContentTemplate="{DataTemplate local:MainPage}" />
+    </FlyoutItem>
+    <FlyoutItem Title="Phân Quyền" Route="UserManagementPage">
+        <ShellContent
+        Title="Phân Quyền"
+        ContentTemplate="{DataTemplate local:UserManagementPage}" />
     </FlyoutItem>
 
     <FlyoutItem Title="Danh sách học sinh" Route="StudentListPage">
         <ShellContent
-            Title=""
+            Title="Danh sách học sinh"
             ContentTemplate="{DataTemplate local:StudentListPage}" />
     </FlyoutItem>
     

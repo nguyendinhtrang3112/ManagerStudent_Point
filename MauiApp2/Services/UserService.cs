@@ -49,5 +49,9 @@ namespace MauiApp2.Services
             }
             return null;
         }
+        public async Task<User?> GetUserByUsername(string username)
+        {
+            return await _database.GetUserByUsernameAsync(username);
+        }
     }
 }

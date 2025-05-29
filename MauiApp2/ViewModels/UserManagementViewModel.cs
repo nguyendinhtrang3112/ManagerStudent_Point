@@ -61,6 +61,13 @@ namespace MauiApp2.ViewModels
 
         private async void OnSaveRole(UserDisplay userDisplay)
         {
+            // Kiểm tra giá trị null hoặc trống trước
+            if (string.IsNullOrWhiteSpace(userDisplay.NewRole))
+            {
+                await Application.Current.MainPage.DisplayAlert("❌ Lỗi", "Vui lòng chọn vai trò hợp lệ.", "OK");
+                return;
+            }
+
             if (userDisplay.Role != userDisplay.NewRole)
             {
                 var user = await _database.GetUserByUsernameAsync(userDisplay.Username);
@@ -69,10 +76,12 @@ namespace MauiApp2.ViewModels
                     user.Role = userDisplay.NewRole;
                     await _database.UpdateUserAsync(user);
 
-                    userDisplay.Role = user.Role; // cập nhật lại hiển thị
+                    // Cập nhật lại giao diện
+                    userDisplay.Role = user.Role;
                     await Application.Current.MainPage.DisplayAlert("✅ Thành công", $"Đã cấp quyền '{user.Role}' cho {user.Username}", "OK");
                 }
             }
         }
+
     }
 }
