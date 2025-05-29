@@ -12,7 +12,8 @@
 
     <!-- Đăng ký route -->
     <ShellContent Route="LoginPage" ContentTemplate="{DataTemplate views:LoginPage}" />
-
+    <ShellContent Route="StudentPage" ContentTemplate="{DataTemplate local:StudentPage}" />
+    <ShellContent Route="UserManagementPage" ContentTemplate="{DataTemplate local:UserManagementPage}" />
     <FlyoutItem Title="Home" Route="MainPage">
         <ShellContent
             Title="Trang chủ"
@@ -24,5 +25,6 @@
             Title=""
             ContentTemplate="{DataTemplate local:StudentListPage}" />
     </FlyoutItem>
+    
 
 </Shell>

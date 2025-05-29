@@ -2,6 +2,7 @@
 using MauiApp2.Views;
 using System.Windows.Input;
 using Microsoft.Maui.Controls;
+using MauiApp2.Models;
 
 namespace MauiApp2.ViewModels
 {
@@ -83,10 +84,23 @@ namespace MauiApp2.ViewModels
                 return;
             }
 
-            if (await _userService.Authenticate(Username, Password))
+            var user = await _userService.GetUserByUsernameAndPassword(Username, Password);
+
+            if (user != null)
             {
-                // Nếu login thành công, điều hướng đến MainPage
-                await Application.Current.MainPage.Navigation.PushAsync(new MainPage());
+                switch (user.Role.ToLower())
+                {
+                    case "admin":
+                        await Shell.Current.GoToAsync("//MainPage");
+                        break;
+                    case "teacher":
+                        await Shell.Current.GoToAsync("//MainPage");
+                        break;
+                    case "student":
+                    default:
+                        await Shell.Current.GoToAsync("//StudentPage");
+                        break;
+                }
             }
             else
             {
@@ -94,6 +108,7 @@ namespace MauiApp2.ViewModels
                 IsErrorVisible = true;
             }
         }
+
 
         private async void OnNavigateToRegister()
         {

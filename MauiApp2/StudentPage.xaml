@@ -1,0 +1,83 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:MauiApp2.Converters"
+             x:Class="MauiApp2.StudentPage"
+             Title="Danh sách học sinh"
+             BackgroundColor="White">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:AlternatingRowColorConverter x:Key="AlternatingRowColorConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+
+            <!-- Thanh tiêu đề có nút trở về -->
+            <Grid ColumnDefinitions="Auto,*,Auto" HeightRequest="50" VerticalOptions="Center">
+                <!-- Nút trở về đăng nhập -->
+                <Button Grid.Column="0"
+                        Text="←"
+                        FontSize="18"
+                        BackgroundColor="Transparent"
+                        TextColor="Black"
+                        Clicked="OnBackToLoginClicked"
+                        HorizontalOptions="Start"
+                        VerticalOptions="Center"/>
+
+                <!-- Tiêu đề ở giữa -->
+                <Label Grid.Column="1" Text="QUẢN LÝ HỌC SINH"
+                       FontSize="24" FontAttributes="Bold"
+                       HorizontalOptions="Center"
+                       VerticalTextAlignment="Center"
+                       TextColor="Black"/>
+
+                <!-- Cột phải trống -->
+                <BoxView Grid.Column="2" WidthRequest="40" Color="Transparent"/>
+            </Grid>
+
+            <!-- Ô tìm kiếm -->
+            <SearchBar Placeholder="Tìm học sinh theo tên"
+                       Text="{Binding SearchText}"
+                       BackgroundColor="#f0f0f0"
+                       HeightRequest="40"/>
+
+            <!-- Bảng tiêu đề -->
+            <Grid ColumnDefinitions="2*,1*,1*,1*"
+                  BackgroundColor="#e0e0e0"
+                  Padding="10"
+                  HeightRequest="40"
+                  ColumnSpacing="10">
+                <Label Grid.Column="0" Text="Tên" FontAttributes="Bold" VerticalTextAlignment="Center" TextColor="Black"/>
+                <Label Grid.Column="1" Text="Lớp" FontAttributes="Bold" VerticalTextAlignment="Center" TextColor="Black"/>
+                <Label Grid.Column="2" Text="Môn" FontAttributes="Bold" VerticalTextAlignment="Center" TextColor="Black"/>
+                <Label Grid.Column="3" Text="Điểm" FontAttributes="Bold" VerticalTextAlignment="Center" TextColor="Black"/>
+            </Grid>
+
+            <!-- Danh sách học sinh -->
+            <CollectionView ItemsSource="{Binding FilteredStudents}"
+                            BackgroundColor="White"
+                            Margin="0">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid ColumnDefinitions="2*,1*,1*,1*"
+                              Padding="10"
+                              Margin="0,1"
+                              HeightRequest="50"
+                              ColumnSpacing="10"
+                              BackgroundColor="{Binding AlternatingColor}"
+                              VerticalOptions="Center">
+
+                            <Label Grid.Column="0" Text="{Binding Name}" VerticalTextAlignment="Center" TextColor="Black"/>
+                            <Label Grid.Column="1" Text="{Binding Class}" VerticalTextAlignment="Center" TextColor="Black"/>
+                            <Label Grid.Column="2" Text="{Binding SubjectName}" VerticalTextAlignment="Center" TextColor="Black"/>
+                            <Label Grid.Column="3" Text="{Binding Grade}" VerticalTextAlignment="Center" TextColor="Black"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

@@ -33,7 +33,7 @@ public partial class StudentListPage : ContentPage
             var student = students[i];
             var subject = subjects.FirstOrDefault(s => s.Id == student.SubjectId);
             student.SubjectName = subject?.Name ?? "(Không rõ)";
-            student.RowIndex = i; // ✅ Cập nhật chỉ số dòng
+            student.RowIndex = i;
         }
 
         allStudents = students;
@@ -82,12 +82,14 @@ public partial class StudentListPage : ContentPage
             var chosenSubject = subjects.FirstOrDefault(s => s.Name == selectedSubject);
             if (chosenSubject == null) return;
 
+            // ✅ Cập nhật thuộc tính trực tiếp, giữ nguyên Id
             student.Name = newName;
             student.Grade = newGrade;
             student.Class = newClass;
             student.SubjectId = chosenSubject.Id;
             student.SubjectName = chosenSubject.Name;
 
+            // ✅ Gọi Update để giữ nguyên ID
             await _dbHelper.UpdateStudentAsync(student);
             await LoadStudents();
         }
@@ -101,21 +103,20 @@ public partial class StudentListPage : ContentPage
             .Where(s => s.Name.ToLower().Contains(keyword))
             .Select((s, index) => new Student
             {
-                Id = s.Id,
+                Id = s.Id, // ✅ Giữ nguyên ID
                 Name = s.Name,
                 Grade = s.Grade,
                 Class = s.Class,
                 DateOfBirth = s.DateOfBirth,
                 SubjectId = s.SubjectId,
                 SubjectName = s.SubjectName,
-                RowIndex = index // ✅ Gán lại chỉ số
+                RowIndex = index
             })
             .ToList();
 
         StudentList.ItemsSource = filtered;
     }
 
-    // ✅ Thêm sự kiện xử lý cho nút ☰
     private void OnMenuButtonClicked(object sender, EventArgs e)
     {
         Shell.Current.FlyoutIsPresented = true;

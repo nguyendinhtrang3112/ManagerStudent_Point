@@ -31,7 +31,7 @@
                    CornerRadius="10"
                    Padding="10"
                    BackgroundColor="White">
-                <Entry Placeholder="Email"
+                <Entry Placeholder="Username"
                        Keyboard="Email"
                        FontSize="16"
                        Text="{Binding Username, Mode=TwoWay}" />

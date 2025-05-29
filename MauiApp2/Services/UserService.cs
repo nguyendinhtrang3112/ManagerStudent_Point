@@ -1,13 +1,11 @@
 ﻿using MauiApp2.Models;
 using System.Threading.Tasks;
 
-
 namespace MauiApp2.Services
 {
     public class UserService
     {
         private readonly DatabaseHelper _database;
-
         public UserService()
         {
             _database = new DatabaseHelper();
@@ -37,6 +35,19 @@ namespace MauiApp2.Services
         {
             var user = await _database.GetUserByUsernameAsync(username);
             return user != null && user.Password == password;
+        }
+
+        /// <summary>
+        /// Lấy user đầy đủ (có Role) nếu xác thực thành công.
+        /// </summary>
+        public async Task<User?> GetUserByUsernameAndPassword(string username, string password)
+        {
+            var user = await _database.GetUserByUsernameAsync(username);
+            if (user != null && user.Password == password)
+            {
+                return user;
+            }
+            return null;
         }
     }
 }

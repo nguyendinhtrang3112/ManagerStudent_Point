@@ -52,14 +52,21 @@ public partial class MainPage : ContentPage
 
         var student = new Student
         {
-            Name = NameEntry.Text,
+            Name = NameEntry.Text?.Trim(),
             Grade = double.TryParse(GradeEntry.Text, out double g) ? g : 0,
-            Class = ClassEntry.Text,
+            Class = ClassEntry.Text?.Trim(),
             DateOfBirth = DateOfBirthPicker.Date,
             SubjectId = selectedSubject.Id
         };
 
-        await _dbHelper.AddStudentAsync(student);
+        // Gọi phương thức thêm học sinh (đã có kiểm tra trùng trong DatabaseHelper)
+        var result = await _dbHelper.AddStudentAsync(student);
+
+        if (result == 0)
+        {
+            await DisplayAlert("Thông báo", "Học sinh này đã tồn tại với môn học đã chọn!", "OK");
+            return;
+        }
 
         // Reset input fields
         NameEntry.Text = "";
@@ -76,6 +83,8 @@ public partial class MainPage : ContentPage
     {
         var students = await _dbHelper.GetAllStudentsAsync();
         // TODO: Gán vào CollectionView nếu cần hiển thị danh sách
+        // Ví dụ:
+        // StudentCollectionView.ItemsSource = students;
     }
 
     private void SubjectPlaceholder_Tapped(object sender, EventArgs e)
@@ -86,19 +95,11 @@ public partial class MainPage : ContentPage
 
     private void SubjectPicker_SelectedIndexChanged(object sender, EventArgs e)
     {
-        if (SubjectPicker.SelectedIndex >= 0)
-        {
-            SubjectPlaceholder.IsVisible = false;
-        }
-        else
-        {
-            SubjectPlaceholder.IsVisible = true;
-        }
+        SubjectPlaceholder.IsVisible = SubjectPicker.SelectedIndex < 0;
     }
+
     private void OnMenuButtonClicked(object sender, EventArgs e)
     {
         Shell.Current.FlyoutIsPresented = true;
     }
-
-
 }

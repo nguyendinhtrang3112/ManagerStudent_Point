@@ -6,42 +6,44 @@ namespace MauiApp2.Models
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
-
-        public string Name { get; set; }
         public double Grade { get; set; }
+        [NotNull]
+        public string Name { get; set; }
+
+        [NotNull]
         public string Class { get; set; }
+
+        [NotNull]
         public DateTime DateOfBirth { get; set; }
 
-        // Liên kết với bảng Subject
+        // Liên kết đến môn học chính (nếu cần)
         public int SubjectId { get; set; }
 
-        [Ignore] // Không lưu vào DB
-        public string SubjectName { get; set; }
+        // Liên kết đến tài khoản người dùng
+        public int? UserId { get; set; }
 
-        [Ignore] // Không lưu vào DB, dùng để tính màu xen kẽ
+        [Ignore]
+        public string SubjectName { get; set; } = string.Empty;
+
+        [Ignore]
         public int RowIndex { get; set; }
 
-        // Constructor mặc định
         public Student()
         {
             Name = string.Empty;
             Class = string.Empty;
             DateOfBirth = DateTime.MinValue;
-            SubjectId = 0;
-            SubjectName = string.Empty;
-            RowIndex = 0;
         }
 
-        // Constructor có tham số
-        public Student(string name, double grade, string className, DateTime dateOfBirth, int subjectId, string subjectName)
+        public Student(string name, string className, DateTime dob, int subjectId, int? userId = null, double grade = 0)
         {
             Name = name;
-            Grade = grade;
             Class = className;
-            DateOfBirth = dateOfBirth;
+            DateOfBirth = dob;
+            Grade = grade;
             SubjectId = subjectId;
-            SubjectName = subjectName;
-            RowIndex = 0;
+            UserId = userId;
+            Grade = grade;
         }
     }
 }
