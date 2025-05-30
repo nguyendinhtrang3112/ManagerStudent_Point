@@ -11,18 +11,14 @@
 - **Đăng ký / Đăng nhập** với email và mật khẩu
 - Thông tin người dùng được lưu cục bộ trong SQLite
 
-### 📁 Quản lý Dự án (Project)
-- Tạo, cập nhật, xoá và xem chi tiết các dự án
-- Mỗi dự án bao gồm: tên, mô tả, ngày bắt đầu, ngày kết thúc
+### 📁 Quản lý điểm Học sinh (Student)
+- Tạo, cập nhật, xoá và xem chi tiết điểm các học sinh
 
-### ✅ Quản lý Công việc (Task)
-- Gắn công việc vào từng dự án
-- Cập nhật trạng thái, tiến độ %, hạn hoàn thành
-- Giao việc cho người dùng trong hệ thống
+### ✅ Quản lý User (User)
+- Tạo, cập nhật, xoá và xem chi tiết điểm các học sinh
 
-### 👥 Quản lý Thành viên (Project Members)
-- Thêm thành viên tham gia dự án
-- Lưu ngày tham gia
+### 👥 Quản lý Học sinh, Giáo viên (Teacher)
+- Tạo, cập nhật, xoá và xem chi tiết điểm các học sinh
 
 ---
 
