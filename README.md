@@ -1,5 +1,5 @@
 [Quan_ly_project_source_code](https://github.com/nguyendinhtrang3112/ManagerStudent_Point)
-# 📱 ỨNG DỤNG QUẢN LÝ DỰ ÁN – MAUI + SQLite
+# 📱 ỨNG DỤNG QUẢN LÝ ĐIỂM HỌC SINH – MAUI + SQLite
 
 Đây là một ứng dụng **quản lý dự án được xây dựng bằng **.NET MAUI** và sử dụng **SQLite** làm cơ sở dữ liệu cục bộ. Ứng dụng hỗ trợ người dùng cá nhân quản lý công việc và dự án một cách đơn giản, dễ sử dụng, không cần kết nối internet.
 
