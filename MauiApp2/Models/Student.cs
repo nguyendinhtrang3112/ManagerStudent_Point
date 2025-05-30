@@ -43,7 +43,6 @@ namespace MauiApp2.Models
             Grade = grade;
             SubjectId = subjectId;
             UserId = userId;
-            Grade = grade;
         }
     }
 }

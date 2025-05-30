@@ -1,0 +1,85 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:MauiApp2.ViewModels"
+             x:Class="MauiApp2.TeacherListPage"
+             x:DataType="vm:TeacherListViewModel"
+             xmlns:models="clr-namespace:MauiApp2.Models"
+             Title="Giáo viên"
+             BackgroundColor="White">
+
+    <ContentPage.BindingContext>
+        <vm:TeacherListViewModel />
+    </ContentPage.BindingContext>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+
+            <!-- Nút quay về -->
+            <Button Text="← Quay về"
+                    FontAttributes="Bold"
+                    TextColor="White"
+                    BackgroundColor="#007AFF"
+                    Clicked="OnBackButtonClicked"
+                    HorizontalOptions="Start"
+                    Margin="0,0,0,10" />
+
+            <!-- Tiêu đề -->
+            <Label Text="DANH SÁCH GIÁO VIÊN"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   TextColor="Black" />
+
+            <!-- Thanh tìm kiếm -->
+            <SearchBar Placeholder="Tìm theo tên"
+                       Text="{Binding SearchKeyword}"
+                       TextChanged="OnSearchBarTextChanged" />
+
+            <!-- Danh sách giáo viên -->
+            <CollectionView ItemsSource="{Binding Teachers}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Teacher">
+                        <Grid ColumnDefinitions="2*,2*,2*,Auto"
+                              Padding="10"
+                              BackgroundColor="#f9f9f9"
+                              Margin="0,5"
+                              VerticalOptions="Center">
+
+                            <!-- Tên, Email, Tài khoản -->
+                            <Label Grid.Column="0" Text="{Binding Name}" VerticalTextAlignment="Center" />
+                            <Label Grid.Column="1" Text="{Binding Email}" VerticalTextAlignment="Center" />
+                            
+
+                            <!-- Nút Sửa / Xoá -->
+                            <HorizontalStackLayout Grid.Column="3" Spacing="10" VerticalOptions="Center">
+                                <Button Text="Sửa"
+                                        BackgroundColor="Orange"
+                                        TextColor="White"
+                                        FontAttributes="Bold"
+                                        Padding="10,5"
+                                        Command="{Binding BindingContext.EditTeacherCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
+                                        CommandParameter="{Binding}" />
+
+                                <Button Text="Xoá"
+                                        BackgroundColor="Red"
+                                        TextColor="White"
+                                        FontAttributes="Bold"
+                                        Padding="10,5"
+                                        Command="{Binding BindingContext.DeleteTeacherCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
+                                        CommandParameter="{Binding}" />
+                            </HorizontalStackLayout>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- Nút thêm -->
+            <Button Text="➕ Thêm giáo viên"
+                    Command="{Binding AddTeacherCommand}"
+                    BackgroundColor="#34C759"
+                    TextColor="White"
+                    Margin="0,10" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

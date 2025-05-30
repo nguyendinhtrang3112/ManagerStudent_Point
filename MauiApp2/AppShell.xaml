@@ -14,6 +14,7 @@
     <ShellContent Route="LoginPage" ContentTemplate="{DataTemplate views:LoginPage}" />
     <ShellContent Route="StudentPage" ContentTemplate="{DataTemplate local:StudentPage}" />
     
+    
     <FlyoutItem Title="Home" Route="MainPage">
         <ShellContent
             Title="Home"
@@ -30,6 +31,11 @@
             Title="Danh sách học sinh"
             ContentTemplate="{DataTemplate local:StudentListPage}" />
     </FlyoutItem>
-    
+    <FlyoutItem Title="Danh sách giáo viên" Route="TeacherListPage">
+        <ShellContent
+        Title="Danh sách giáo viên"
+        ContentTemplate="{DataTemplate local:TeacherListPage}" />
+    </FlyoutItem>
+
 
 </Shell>
