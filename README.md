@@ -50,6 +50,6 @@
 ```bash
 # Clone repository
 [git clone https://github.com/mudotet/Quan_ly_project.git](https://github.com/nguyendinhtrang3112/ManagerStudent_Point)
-cd Quan_ly_project
+cd Quan_ly_project_source_code
 
 # Mở trong Visual Studio và nhấn "Run" để chạy ứng dụng
